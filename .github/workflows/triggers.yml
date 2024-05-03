@@ -1,0 +1,18 @@
+name: Disk Space Check
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 12 * * *' # Runs every day at noon
+  workflow_dispatch:
+
+jobs:
+    check_disk_space:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run disk space check
+        run: bash ./check_disk_space.sh
