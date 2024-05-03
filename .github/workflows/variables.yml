@@ -1,0 +1,15 @@
+name: Application Deployment Workflow
+
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SERVER_NAME: 'development'  # Change as needed
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy Application
+      run: ./deploy_app.sh
