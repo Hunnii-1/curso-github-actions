@@ -1,0 +1,15 @@
+name: Notification Workflow
+
+on: [push]
+
+jobs:
+  send_notification:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run Notification Script
+      env:
+        NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+      run: ./send_notification.sh "Success"
