@@ -5,11 +5,17 @@ on: [push]
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      SERVER_NAME: 'development'  # Change as needed
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Set Environment
+      run: |
+        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          echo "SERVER_NAME=production" >> $GITHUB_ENV
+        else
+          echo "SERVER_NAME=development" >> $GITHUB_ENV
+        fi
 
     - name: Deploy Application
       run: ./deploy_app.sh
